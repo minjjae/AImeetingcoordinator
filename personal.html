@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="feet 개인 홈 - 나의 일정과 그룹을 한곳에서 확인하세요." />
+    <title>feet | 개인 홈</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="feet 개인 홈">
+          <span class="brand-mark" aria-hidden="true">f</span>
+          <span>feet</span>
+        </a>
+        <nav class="topbar-nav" aria-label="주요 메뉴">
+          <a class="nav-link is-active" href="#home">내 홈</a>
+          <a class="nav-link" href="#groups">내 그룹</a>
+        </nav>
+        <button class="account-button" type="button" aria-label="프로필 설정 열기" data-open-profile>
+          <span class="avatar avatar--small" aria-hidden="true">J</span>
+          <span class="account-name">Jisoo</span>
+          <span class="chevron" aria-hidden="true">⌄</span>
+        </button>
+      </header>
+
+      <main id="home" class="page-content">
+        <section class="profile-overview" aria-labelledby="profile-heading">
+          <div class="profile-main">
+            <span class="avatar avatar--large" aria-hidden="true">J</span>
+            <div>
+              <p class="eyebrow">PERSONAL SPACE</p>
+              <h1 id="profile-heading">안녕하세요, Jisoo님</h1>
+            </div>
+          </div>
+          <div class="profile-side">
+            <div class="sync-status" aria-label="Google Calendar 동기화됨">
+              <span class="sync-dot" aria-hidden="true"></span>
+              Google Calendar 연결됨
+            </div>
+            <button class="text-button" type="button" data-show-toast="Google Calendar와 방금 동기화했어요.">동기화</button>
+          </div>
+        </section>
+
+        <section class="next-meeting" aria-label="다음 확정 회의">
+          <div class="next-meeting-icon" aria-hidden="true">✦</div>
+          <div>
+            <p class="next-meeting-label">다음 확정 회의</p>
+            <p><strong>해커톤 팀 스프린트</strong><span class="next-meeting-time">목요일 · 16:00–17:00</span></p>
+          </div>
+          <button class="next-meeting-link" type="button" data-event-id="hackathon-sprint">일정 보기 <span aria-hidden="true">→</span></button>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="calendar-panel" aria-labelledby="calendar-heading">
+            <div class="section-header calendar-header">
+              <div>
+                <p class="eyebrow">THIS WEEK</p>
+                <h2 id="calendar-heading">내 일정</h2>
+                <p class="week-range" id="week-range">2026년 8월 10일 — 8월 16일</p>
+              </div>
+              <div class="calendar-actions">
+                <div class="legend" aria-label="일정 범례">
+                  <span><i class="legend-dot legend-dot--feet" aria-hidden="true"></i>feet 확정 회의</span>
+                  <span><i class="legend-dot legend-dot--google" aria-hidden="true"></i>Google 일정</span>
+                </div>
+                <button class="expand-calendar-button" type="button" data-open-dialog="month-calendar-dialog" aria-label="전체 월간 캘린더 열기">
+                  <span aria-hidden="true">↗</span> 월간 보기
+                </button>
+                <div class="week-controls" aria-label="캘린더 가로 이동">
+                  <button class="icon-button" type="button" id="scroll-calendar-left" aria-label="이전 요일 보기">←</button>
+                  <button class="icon-button" type="button" id="scroll-calendar-right" aria-label="다음 요일 보기">→</button>
+                </div>
+              </div>
+            </div>
+
+            <p class="calendar-hint">좌우로 넘겨 토요일과 일요일 일정까지 확인하세요.</p>
+            <div class="calendar-viewport" id="calendar-viewport" aria-label="월요일부터 일요일까지의 주간 캘린더">
+              <div class="weekly-calendar" id="weekly-calendar" role="grid" aria-label="2026년 8월 10일 주간 일정"></div>
+            </div>
+          </section>
+
+          <aside id="groups" class="groups-panel" aria-labelledby="groups-heading">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">MY GROUPS</p>
+                <h2 id="groups-heading">내 그룹</h2>
+              </div>
+              <span class="group-count">3</span>
+            </div>
+
+            <div class="group-list">
+              <button class="group-card" type="button" data-group-name="해커톤 팀">
+                <span class="group-icon group-icon--indigo" aria-hidden="true">H</span>
+                <span class="group-copy">
+                  <strong>해커톤 팀</strong>
+                  <small>5명 · 다음 회의 목 16:00</small>
+                </span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </button>
+              <button class="group-card" type="button" data-group-name="디자인 스터디">
+                <span class="group-icon group-icon--peach" aria-hidden="true">D</span>
+                <span class="group-copy">
+                  <strong>디자인 스터디</strong>
+                  <small>4명 · 일정 조율 중 1건</small>
+                </span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </button>
+              <button class="group-card" type="button" data-group-name="프로젝트 멘토링">
+                <span class="group-icon group-icon--mint" aria-hidden="true">M</span>
+                <span class="group-copy">
+                  <strong>프로젝트 멘토링</strong>
+                  <small>3명 · 다음 회의 토 13:00</small>
+                </span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </button>
+            </div>
+
+            <div class="pending-card">
+              <span class="pending-icon" aria-hidden="true">!</span>
+              <p><strong>확인이 필요한 요청이 있어요</strong><br /><span>디자인 스터디의 일정 후보를 확인해 주세요.</span></p>
+              <button class="text-button" type="button" data-show-toast="일정 후보 확인 화면으로 이동할 예정이에요.">확인</button>
+            </div>
+
+            <div class="group-actions">
+              <button class="button button--primary" type="button" data-open-dialog="create-group-dialog">그룹 만들기</button>
+              <button class="button button--secondary" type="button" data-open-dialog="join-group-dialog">참여 요청</button>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <dialog class="modal month-modal" id="month-calendar-dialog" aria-labelledby="month-calendar-title">
+      <div class="modal-header month-modal-header">
+        <div>
+          <p class="eyebrow">MONTHLY CALENDAR</p>
+          <h2 id="month-calendar-title">월간 일정</h2>
+        </div>
+        <div class="month-header-actions">
+          <button class="today-button" id="month-today" type="button">이번 달</button>
+          <div class="week-controls" aria-label="월 이동">
+            <button class="icon-button" id="previous-month" type="button" aria-label="이전 달">←</button>
+            <button class="icon-button" id="next-month" type="button" aria-label="다음 달">→</button>
+          </div>
+          <button class="close-button" type="button" aria-label="닫기" data-close-dialog>×</button>
+        </div>
+      </div>
+      <div class="month-calendar-toolbar">
+        <strong id="month-calendar-label">2026년 8월</strong>
+        <div class="legend" aria-label="월간 일정 범례">
+          <span><i class="legend-dot legend-dot--feet" aria-hidden="true"></i>feet 확정 회의</span>
+          <span><i class="legend-dot legend-dot--google" aria-hidden="true"></i>Google 일정</span>
+        </div>
+      </div>
+      <div class="month-calendar-scroll">
+        <div class="month-weekdays" aria-hidden="true">
+          <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+        </div>
+        <div class="month-calendar-grid" id="month-calendar-grid" role="grid" aria-label="2026년 8월 월간 일정"></div>
+      </div>
+    </dialog>
+
+    <dialog class="modal" id="event-dialog" aria-labelledby="event-dialog-title">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow" id="event-source">MEETING</p>
+          <h2 id="event-dialog-title">일정 상세</h2>
+        </div>
+        <button class="close-button" type="button" aria-label="닫기" data-close-dialog>×</button>
+      </div>
+      <div class="event-detail" id="event-detail"></div>
+      <div class="modal-footer">
+        <button class="button button--secondary" type="button" data-close-dialog>닫기</button>
+        <button class="button button--primary" type="button" data-show-toast="참석 여부가 저장되었어요.">참석 가능</button>
+      </div>
+    </dialog>
+
+    <dialog class="modal" id="create-group-dialog" aria-labelledby="create-group-title">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">NEW GROUP</p>
+          <h2 id="create-group-title">새 그룹 만들기</h2>
+        </div>
+        <button class="close-button" type="button" aria-label="닫기" data-close-dialog>×</button>
+      </div>
+      <form class="modal-form" data-demo-form="그룹을 만들었어요. 멤버를 초대해 일정을 조율해 보세요.">
+        <label>그룹 이름<input class="form-input" type="text" placeholder="예: 해커톤 팀" required /></label>
+        <label>그룹 소개<input class="form-input" type="text" placeholder="그룹의 목적을 짧게 적어주세요" /></label>
+        <div class="modal-footer"><button class="button button--secondary" type="button" data-close-dialog>취소</button><button class="button button--primary" type="submit">그룹 만들기</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="join-group-dialog" aria-labelledby="join-group-title">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">JOIN A GROUP</p>
+          <h2 id="join-group-title">그룹 참여 요청</h2>
+        </div>
+        <button class="close-button" type="button" aria-label="닫기" data-close-dialog>×</button>
+      </div>
+      <form class="modal-form" data-demo-form="참여 요청을 보냈어요. 그룹 호스트가 수락하면 알려드릴게요.">
+        <label>초대 코드<input class="form-input" type="text" placeholder="예: FEET-2026" required /></label>
+        <div class="modal-footer"><button class="button button--secondary" type="button" data-close-dialog>취소</button><button class="button button--primary" type="submit">요청 보내기</button></div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
