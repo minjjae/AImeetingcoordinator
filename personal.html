@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="feet 개인 홈 - 나의 일정과 그룹을 한곳에서 확인하세요." />
-    <title>feet | 개인 홈</title>
+    <meta name="description" content="맞춰(MatchU) 개인 홈 - 나의 일정과 그룹을 한곳에서 확인하세요." />
+    <title>맞춰(MatchU) | 개인 홈</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,9 +13,9 @@
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <a class="brand" href="#home" aria-label="feet 개인 홈">
+        <a class="brand" href="#home" aria-label="맞춰 MatchU 개인 홈">
           <span class="brand-mark" aria-hidden="true">f</span>
-          <span>feet</span>
+          <span>맞춰(MatchU)</span>
         </a>
         <nav class="topbar-nav" aria-label="주요 메뉴">
           <a class="nav-link is-active" href="#home">내 홈</a>
@@ -65,7 +65,7 @@
               </div>
               <div class="calendar-actions">
                 <div class="legend" aria-label="일정 범례">
-                  <span><i class="legend-dot legend-dot--feet" aria-hidden="true"></i>feet 확정 회의</span>
+                  <span><i class="legend-dot legend-dot--feet" aria-hidden="true"></i>맞춰 확정 회의</span>
                   <span><i class="legend-dot legend-dot--google" aria-hidden="true"></i>Google 일정</span>
                 </div>
                 <button class="expand-calendar-button" type="button" data-open-dialog="month-calendar-dialog" aria-label="전체 월간 캘린더 열기">
@@ -94,7 +94,7 @@
             </div>
 
             <div class="group-list">
-              <a class="group-card" href="./group.html" aria-label="해커톤 팀 그룹 홈으로 이동">
+              <a class="group-card" href="./group.html#overview" aria-label="해커톤 팀 그룹 홈으로 이동">
                 <span class="group-icon group-icon--indigo" aria-hidden="true">H</span>
                 <span class="group-copy">
                   <strong>해커톤 팀</strong>
@@ -102,22 +102,22 @@
                 </span>
                 <span class="arrow" aria-hidden="true">→</span>
               </a>
-              <button class="group-card" type="button" data-group-name="디자인 스터디">
+              <a class="group-card" href="./group.html#overview" aria-label="디자인 스터디 그룹 홈으로 이동">
                 <span class="group-icon group-icon--peach" aria-hidden="true">D</span>
                 <span class="group-copy">
                   <strong>디자인 스터디</strong>
                   <small>4명 · 일정 조율 중 1건</small>
                 </span>
                 <span class="arrow" aria-hidden="true">→</span>
-              </button>
-              <button class="group-card" type="button" data-group-name="프로젝트 멘토링">
+              </a>
+              <a class="group-card" href="./group.html#overview" aria-label="프로젝트 멘토링 그룹 홈으로 이동">
                 <span class="group-icon group-icon--mint" aria-hidden="true">M</span>
                 <span class="group-copy">
                   <strong>프로젝트 멘토링</strong>
                   <small>3명 · 다음 회의 토 13:00</small>
                 </span>
                 <span class="arrow" aria-hidden="true">→</span>
-              </button>
+              </a>
             </div>
 
             <div class="pending-card">
@@ -153,7 +153,7 @@
       <div class="month-calendar-toolbar">
         <strong id="month-calendar-label">2026년 8월</strong>
         <div class="legend" aria-label="월간 일정 범례">
-          <span><i class="legend-dot legend-dot--feet" aria-hidden="true"></i>feet 확정 회의</span>
+          <span><i class="legend-dot legend-dot--feet" aria-hidden="true"></i>맞춰 확정 회의</span>
           <span><i class="legend-dot legend-dot--google" aria-hidden="true"></i>Google 일정</span>
         </div>
       </div>
@@ -204,7 +204,7 @@
         <button class="close-button" type="button" aria-label="닫기" data-close-dialog>×</button>
       </div>
       <form class="modal-form" data-demo-form="참여 요청을 보냈어요. 그룹 호스트가 수락하면 알려드릴게요.">
-        <label>초대 코드<input class="form-input" type="text" placeholder="예: FEET-2026" required /></label>
+        <label>초대 코드<input class="form-input" type="text" placeholder="예: MATCHU-2026" required /></label>
         <div class="modal-footer"><button class="button button--secondary" type="button" data-close-dialog>취소</button><button class="button button--primary" type="submit">요청 보내기</button></div>
       </form>
     </dialog>

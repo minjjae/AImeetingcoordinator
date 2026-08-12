@@ -158,7 +158,7 @@ function openEvent(eventId) {
   const event = events.find((item) => item.id === eventId);
   if (!event) return;
   if (monthDialog.open) monthDialog.close();
-  eventSource.textContent = event.source === "feet" ? "FEET CONFIRMED MEETING" : "GOOGLE CALENDAR";
+  eventSource.textContent = event.source === "feet" ? "MATCHU CONFIRMED MEETING" : "GOOGLE CALENDAR";
   eventDetail.replaceChildren();
   const title = document.createElement("h3");
   title.textContent = event.title;
@@ -259,8 +259,6 @@ document.addEventListener("click", (event) => {
   if (openDialogButton) document.getElementById(openDialogButton.dataset.openDialog).showModal();
   const closeButton = event.target.closest("[data-close-dialog]");
   if (closeButton) closeButton.closest("dialog").close();
-  const groupButton = event.target.closest("button[data-group-name]");
-  if (groupButton) showToast(`${groupButton.dataset.groupName} 그룹 홈은 다음 데모 단계에서 연결할 예정이에요.`);
   const toastButton = event.target.closest("[data-show-toast]");
   if (toastButton) showToast(toastButton.dataset.showToast);
   if (event.target.matches("dialog")) event.target.close();
