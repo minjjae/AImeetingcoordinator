@@ -34,6 +34,8 @@ type PersonalDashboard = {
 
 **Writes:** personal scheduling preferences, group-member `personal_importance` through a controlled server action, report read state.
 
+**Join group action:** the `참여 요청` modal accepts a normalized code matching `^[A-Z]{5}[0-9]{5}$`. An authenticated request calls `join_group_with_code`; success refreshes the user's groups and navigates to the joined group. Invalid, expired, exhausted, and duplicate codes receive explicit UI states. A group owner creates a code through `create_group_join_code` and shares the plaintext returned once.
+
 ## 3. Group workspace - `/groups/[groupId]`
 
 **Owner:** Group workspace

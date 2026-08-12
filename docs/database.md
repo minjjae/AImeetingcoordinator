@@ -31,6 +31,8 @@ erDiagram
     PROFILES ||--o{ TEAM_GROUPS : owns
     TEAM_GROUPS ||--o{ GROUP_MEMBERS : has
     PROFILES ||--o{ GROUP_MEMBERS : joins
+    TEAM_GROUPS ||--o{ GROUP_JOIN_CODES : issues
+    PROFILES ||--o{ GROUP_JOIN_CODES : creates
 
     TEAM_GROUPS ||--o{ MEETING_REQUESTS : receives
     PROFILES ||--o{ MEETING_REQUESTS : requests
@@ -58,6 +60,7 @@ The same model is available as [DBML](erd.dbml) for dbdiagram.io or other ERD to
 | `calendar_busy_blocks` | Minimal cached availability derived from Google Calendar | `user_id`, `starts_at`, `ends_at`, `source_event_id` |
 | `team_groups` | A project, study, or team workspace | `owner_user_id`, `name`, `default_meeting_importance` |
 | `group_members` | Membership and each person's importance for that group | `group_id`, `user_id`, `role`, `personal_importance` |
+| `group_join_codes` | Expiring join-code metadata; stores only a SHA-256 hash | `group_id`, `code_hash`, `expires_at`, `max_uses`, `use_count` |
 | `user_preferences` | Individual default scheduling preferences | `preferred_period`, `workday_start`, `max_meetings_per_day` |
 | `meeting_requests` | Natural-language request plus structured constraints | `raw_request`, `ai_constraints`, `duration_minutes`, `status` |
 | `meeting_request_participants` | Required vs optional invitees before a meeting exists | `request_id`, `user_id`, `is_required` |
@@ -115,8 +118,26 @@ Google Calendar's API models an event with start/end times and attendees, which 
 
 1. Create a Supabase project and configure Google Auth.
 2. Add the Google Calendar read-only scope during the consent flow.
-3. Run `supabase/migrations/0001_initial_schema.sql` with the Supabase CLI or SQL editor.
+3. Apply the files in `supabase/migrations/` in filename order with the Supabase CLI or SQL editor.
 4. Use application API routes with a server-side service role only for calendar sync, candidate generation, confirmation, and report generation. Browser clients rely on Row Level Security.
 5. During the hackathon, use fixed mock busy blocks for any teammate who has not completed OAuth.
 
 Do not place access tokens, refresh tokens, service-role keys, or Google client secrets in the database migration, mock data, or Git history.
+
+## Joining a group with a code
+
+Group owners create a ten-character code through `create_group_join_code`: five uppercase English letters followed by five digits, for example `FEATY20268`. The plaintext is returned only once. The database stores a SHA-256 hash, expiry, usage limit, and revocation state; RLS exposes none of those rows directly to clients.
+
+A signed-in user submits the code through `join_group_with_code`. The RPC normalizes and validates the format, locks the matching row to enforce usage limits, inserts the current `auth.uid()` into `group_members`, and returns the group destination. Reusing the same code by an existing member is idempotent and does not consume another use.
+
+```ts
+const { data, error } = await supabase.rpc("join_group_with_code", {
+  submitted_code: joinCode,
+});
+
+if (!error && data?.[0]) {
+  router.push(`/groups/${data[0].group_id}`);
+}
+```
+
+The static `personal.html` demonstrates the same UI contract with local demo data. Replace its lookup with the RPC above after Google/Supabase authentication is connected.

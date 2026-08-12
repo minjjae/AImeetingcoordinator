@@ -16,11 +16,13 @@ Natural-language request -> AI constraint parser -> rule engine -> ranked candid
 - [Database design and ERD](docs/database.md)
 - [Importable DBML ERD](docs/erd.dbml)
 - [Initial Supabase/Postgres migration](supabase/migrations/0001_initial_schema.sql)
+- [Secure group join-code migration](supabase/migrations/0002_group_join_codes.sql)
 - [Page data contracts](docs/page-contracts.md)
 - [Shared MVP mock fixture](fixtures/mvp-demo.json)
 - [Static HTML page merge guide](docs/html-merge-guide.md)
 - [Team Git workflow](CONTRIBUTING.md)
 - [Gmail adjustment-email demo setup](docs/gmail-mediation-demo.md)
+- [Group join-code data and RPC flow](docs/database.md#joining-a-group-with-a-code)
 
 ## Privacy boundary
 

@@ -68,6 +68,18 @@ Table public.group_members {
   }
 }
 
+Table public.group_join_codes {
+  id uuid [pk]
+  group_id uuid [not null, ref: > public.team_groups.id]
+  code_hash varchar [not null, unique, note: 'SHA-256 only; plaintext is returned once']
+  created_by uuid [not null, ref: > public.profiles.id]
+  expires_at timestamptz
+  max_uses int
+  use_count int
+  revoked_at timestamptz
+  created_at timestamptz
+}
+
 Table public.meeting_requests {
   id uuid [pk]
   group_id uuid [not null, ref: > public.team_groups.id]
