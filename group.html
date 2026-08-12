@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="팀원의 일정 내용을 공개하지 않고 함께 가능한 시간을 찾는 모아타임 그룹 페이지"
+    />
+    <title>해커톤 팀 | 모아타임</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="group-body">
+    <aside class="group-sidebar" id="group-sidebar" aria-label="주요 메뉴">
+      <div class="group-sidebar__top">
+        <a class="group-brand" href="./group.html" aria-label="모아타임 홈">
+          <span class="brand__logo" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <rect x="5" y="7" width="22" height="20" rx="5" />
+              <path d="M10 5v5M22 5v5M5 13h22" />
+              <path d="m11.5 20 3 3 6-7" />
+            </svg>
+          </span>
+          <span class="brand__name">모아타임</span>
+        </a>
+        <button class="mobile-close" id="mobile-close" type="button" aria-label="메뉴 닫기">
+          <svg class="icon" aria-hidden="true"><use href="#icon-close" /></svg>
+        </button>
+      </div>
+
+      <nav class="group-nav">
+        <a href="#overview">
+          <svg class="icon" aria-hidden="true"><use href="#icon-grid" /></svg>
+          내 일정
+        </a>
+        <div class="group-nav__label">
+          <span>그룹</span>
+          <button type="button" aria-label="새 그룹 만들기">
+            <svg class="icon" aria-hidden="true"><use href="#icon-plus" /></svg>
+          </button>
+        </div>
+        <a href="#design-team"><span class="group-dot group-dot--coral"></span>디자인 팀</a>
+        <a class="is-active" href="./group.html" aria-current="page">
+          <span class="group-dot group-dot--indigo"></span>
+          해커톤 팀
+          <svg class="icon group-nav__chevron" aria-hidden="true"><use href="#icon-chevron" /></svg>
+        </a>
+        <button class="group-nav__create" type="button">
+          <svg class="icon" aria-hidden="true"><use href="#icon-plus" /></svg>
+          새 그룹 만들기
+        </button>
+      </nav>
+
+      <div class="sidebar-profile">
+        <button type="button">
+          <svg class="icon" aria-hidden="true"><use href="#icon-settings" /></svg>
+          설정
+        </button>
+        <a href="./index.html">
+          <svg class="icon" aria-hidden="true"><use href="#icon-logout" /></svg>
+          로그아웃
+        </a>
+        <div class="sidebar-profile__user">
+          <span class="member-avatar member-avatar--min">민</span>
+          <span><strong>김민재</strong><small>minjae@moatime.kr</small></span>
+        </div>
+      </div>
+    </aside>
+
+    <button class="sidebar-scrim" id="sidebar-scrim" type="button" aria-label="메뉴 닫기"></button>
+
+    <main class="group-main" id="overview">
+      <header class="mobile-topbar">
+        <button id="mobile-open" type="button" aria-label="메뉴 열기">
+          <svg class="icon" aria-hidden="true"><use href="#icon-menu" /></svg>
+        </button>
+        <a class="group-brand" href="./group.html" aria-label="모아타임 홈">
+          <span class="brand__logo" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <rect x="5" y="7" width="22" height="20" rx="5" />
+              <path d="M10 5v5M22 5v5M5 13h22" />
+              <path d="m11.5 20 3 3 6-7" />
+            </svg>
+          </span>
+          <span class="brand__name">모아타임</span>
+        </a>
+        <span class="member-avatar member-avatar--min">민</span>
+      </header>
+
+      <div class="group-shell">
+        <div class="breadcrumb" aria-label="현재 위치">
+          <span>그룹</span>
+          <svg class="icon" aria-hidden="true"><use href="#icon-chevron" /></svg>
+          <strong>해커톤 팀</strong>
+        </div>
+
+        <section class="group-hero" aria-labelledby="group-title">
+          <div class="group-hero__copy">
+            <div class="group-kicker"><span></span>다음 모임 · 8월 셋째 주</div>
+            <h1 id="group-title">해커톤 팀</h1>
+            <p>아이디어를 빠르게 만들고, 함께 데모까지 완성하는 팀이에요.</p>
+            <div class="group-hero__people" aria-label="그룹 멤버 5명">
+              <div class="avatar-stack" aria-hidden="true">
+                <span class="member-avatar member-avatar--min">민</span>
+                <span class="member-avatar member-avatar--ji">지</span>
+                <span class="member-avatar member-avatar--seo">서</span>
+                <span class="member-avatar member-avatar--jun">준</span>
+                <span class="member-avatar member-avatar--yu">유</span>
+              </div>
+              <span>김민재 외 4명</span>
+            </div>
+          </div>
+          <button class="primary-action" id="find-best-time" type="button">
+            <svg class="icon" aria-hidden="true"><use href="#icon-sparkles" /></svg>
+            가장 좋은 시간 찾기
+          </button>
+        </section>
+
+        <section class="group-stats" aria-label="그룹 정보">
+          <div>
+            <span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="#icon-users" /></svg></span>
+            <p><strong>5명</strong><span>함께하는 멤버</span></p>
+          </div>
+          <div>
+            <span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="#icon-calendar" /></svg></span>
+            <p><strong>매주</strong><span>12번째 정기 모임</span></p>
+          </div>
+          <div>
+            <span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="#icon-chart" /></svg></span>
+            <p><strong>87%</strong><span>평균 참석률</span></p>
+          </div>
+          <div>
+            <span class="stat-icon"><svg class="icon" aria-hidden="true"><use href="#icon-clock" /></svg></span>
+            <p><strong>60분</strong><span>모임 시간</span></p>
+          </div>
+        </section>
+
+        <div class="group-workspace">
+          <section class="members-card" aria-labelledby="members-title">
+            <header class="section-header">
+              <div><span class="section-label">우리 팀</span><h2 id="members-title">멤버</h2></div>
+              <button class="quiet-button" type="button">
+                <svg class="icon" aria-hidden="true"><use href="#icon-user-plus" /></svg>
+                초대
+              </button>
+            </header>
+
+            <div class="member-list">
+              <article class="member-row">
+                <span class="member-avatar member-avatar--min">민</span>
+                <div><strong>김민재 <em>나</em></strong><span>최근 참석률 92%</span></div>
+                <small>PM 선호</small>
+              </article>
+              <article class="member-row">
+                <span class="member-avatar member-avatar--ji">지</span>
+                <div><strong>박지수 <em class="required">필수</em></strong><span>최근 참석률 78%</span></div>
+                <small>AM 선호</small>
+              </article>
+              <article class="member-row">
+                <span class="member-avatar member-avatar--seo">서</span>
+                <div><strong>이서연</strong><span>최근 참석률 90%</span></div>
+                <small>PM 선호</small>
+              </article>
+              <article class="member-row">
+                <span class="member-avatar member-avatar--jun">준</span>
+                <div><strong>최준호</strong><span>최근 참석률 84%</span></div>
+                <small>시간 무관</small>
+              </article>
+              <article class="member-row">
+                <span class="member-avatar member-avatar--yu">유</span>
+                <div><strong>정유나</strong><span>최근 참석률 91%</span></div>
+                <small>PM 선호</small>
+              </article>
+            </div>
+
+            <aside class="privacy-callout">
+              <svg class="icon" aria-hidden="true"><use href="#icon-lock" /></svg>
+              <p><strong>상세 일정은 안전하게</strong><span>멤버에게는 가능한 시간만 보여요.</span></p>
+            </aside>
+          </section>
+
+          <section class="availability-card" aria-labelledby="availability-title">
+            <header class="section-header availability-header">
+              <div><span class="section-label">8월 17일–21일</span><h2 id="availability-title">함께 가능한 시간</h2></div>
+              <div class="availability-legend" aria-label="가능 인원 범례">
+                <span><i class="density-dot density-dot--high"></i>모두 가능</span>
+                <span><i class="density-dot density-dot--mid"></i>4명 가능</span>
+                <span><i class="density-dot density-dot--low"></i>3명 이하</span>
+              </div>
+            </header>
+
+            <div class="availability-layout">
+              <div class="calendar-scroll" tabindex="0" aria-label="좌우로 스크롤 가능한 그룹 일정표">
+                <div class="availability-grid" role="grid" aria-label="8월 셋째 주 그룹 가능 시간">
+                  <span class="grid-corner" aria-hidden="true"></span>
+                  <span class="grid-day" role="columnheader"><strong>월</strong><small>17</small></span>
+                  <span class="grid-day" role="columnheader"><strong>화</strong><small>18</small></span>
+                  <span class="grid-day" role="columnheader"><strong>수</strong><small>19</small></span>
+                  <span class="grid-day" role="columnheader"><strong>목</strong><small>20</small></span>
+                  <span class="grid-day" role="columnheader"><strong>금</strong><small>21</small></span>
+
+                  <span class="grid-time" role="rowheader">10<small>AM</small></span>
+                  <button class="time-cell density-3" type="button" data-day="월요일" data-date="8월 17일" data-time="오전 10:00" data-count="3" aria-label="월요일 오전 10시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+                  <button class="time-cell density-4" type="button" data-day="화요일" data-date="8월 18일" data-time="오전 10:00" data-count="4" aria-label="화요일 오전 10시, 5명 중 4명 가능"><span>4</span><small>/5</small></button>
+                  <button class="time-cell density-3" type="button" data-day="수요일" data-date="8월 19일" data-time="오전 10:00" data-count="3" aria-label="수요일 오전 10시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+                  <button class="time-cell density-2" type="button" data-day="목요일" data-date="8월 20일" data-time="오전 10:00" data-count="2" aria-label="목요일 오전 10시, 5명 중 2명 가능"><span>2</span><small>/5</small></button>
+                  <button class="time-cell density-3" type="button" data-day="금요일" data-date="8월 21일" data-time="오전 10:00" data-count="3" aria-label="금요일 오전 10시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+
+                  <span class="grid-time" role="rowheader">11<small>AM</small></span>
+                  <button class="time-cell density-2" type="button" data-day="월요일" data-date="8월 17일" data-time="오전 11:00" data-count="2" aria-label="월요일 오전 11시, 5명 중 2명 가능"><span>2</span><small>/5</small></button>
+                  <button class="time-cell density-4" type="button" data-day="화요일" data-date="8월 18일" data-time="오전 11:00" data-count="4" aria-label="화요일 오전 11시, 5명 중 4명 가능"><span>4</span><small>/5</small></button>
+                  <button class="time-cell density-4" type="button" data-day="수요일" data-date="8월 19일" data-time="오전 11:00" data-count="4" aria-label="수요일 오전 11시, 5명 중 4명 가능"><span>4</span><small>/5</small></button>
+                  <button class="time-cell density-3" type="button" data-day="목요일" data-date="8월 20일" data-time="오전 11:00" data-count="3" aria-label="목요일 오전 11시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+                  <button class="time-cell density-2" type="button" data-day="금요일" data-date="8월 21일" data-time="오전 11:00" data-count="2" aria-label="금요일 오전 11시, 5명 중 2명 가능"><span>2</span><small>/5</small></button>
+
+                  <span class="grid-time" role="rowheader">2<small>PM</small></span>
+                  <button class="time-cell density-3" type="button" data-day="월요일" data-date="8월 17일" data-time="오후 2:00" data-count="3" aria-label="월요일 오후 2시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+                  <button class="time-cell density-5 is-selected" type="button" data-day="화요일" data-date="8월 18일" data-time="오후 2:00" data-count="5" aria-label="화요일 오후 2시, 5명 모두 가능" aria-pressed="true"><span>5</span><small>/5</small></button>
+                  <button class="time-cell density-3" type="button" data-day="수요일" data-date="8월 19일" data-time="오후 2:00" data-count="3" aria-label="수요일 오후 2시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+                  <button class="time-cell density-4" type="button" data-day="목요일" data-date="8월 20일" data-time="오후 2:00" data-count="4" aria-label="목요일 오후 2시, 5명 중 4명 가능"><span>4</span><small>/5</small></button>
+                  <button class="time-cell density-3" type="button" data-day="금요일" data-date="8월 21일" data-time="오후 2:00" data-count="3" aria-label="금요일 오후 2시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+
+                  <span class="grid-time" role="rowheader">3<small>PM</small></span>
+                  <button class="time-cell density-2" type="button" data-day="월요일" data-date="8월 17일" data-time="오후 3:00" data-count="2" aria-label="월요일 오후 3시, 5명 중 2명 가능"><span>2</span><small>/5</small></button>
+                  <button class="time-cell density-4" type="button" data-day="화요일" data-date="8월 18일" data-time="오후 3:00" data-count="4" aria-label="화요일 오후 3시, 5명 중 4명 가능"><span>4</span><small>/5</small></button>
+                  <button class="time-cell density-3" type="button" data-day="수요일" data-date="8월 19일" data-time="오후 3:00" data-count="3" aria-label="수요일 오후 3시, 5명 중 3명 가능"><span>3</span><small>/5</small></button>
+                  <button class="time-cell density-4" type="button" data-day="목요일" data-date="8월 20일" data-time="오후 3:00" data-count="4" aria-label="목요일 오후 3시, 5명 중 4명 가능"><span>4</span><small>/5</small></button>
+                  <button class="time-cell density-2" type="button" data-day="금요일" data-date="8월 21일" data-time="오후 3:00" data-count="2" aria-label="금요일 오후 3시, 5명 중 2명 가능"><span>2</span><small>/5</small></button>
+                </div>
+              </div>
+
+              <aside class="selected-slot" aria-live="polite">
+                <span class="section-label">선택한 시간</span>
+                <div class="selected-slot__date">
+                  <strong id="selected-day">화요일</strong>
+                  <span id="selected-date">8월 18일 · 오후 2:00</span>
+                </div>
+                <div class="selected-slot__count"><strong id="selected-count">5</strong><span>/ 5명 가능</span></div>
+                <div class="selected-slot__avatars" aria-label="가능한 멤버">
+                  <span class="member-avatar member-avatar--min">민</span>
+                  <span class="member-avatar member-avatar--ji">지</span>
+                  <span class="member-avatar member-avatar--seo">서</span>
+                  <span class="member-avatar member-avatar--jun">준</span>
+                  <span class="member-avatar member-avatar--yu">유</span>
+                </div>
+                <p id="selected-note"><svg class="icon" aria-hidden="true"><use href="#icon-check" /></svg>모두 참석할 수 있어요</p>
+              </aside>
+            </div>
+          </section>
+        </div>
+
+        <section class="recommendations" id="recommendations" aria-labelledby="recommendations-title" hidden>
+          <header class="recommendations__header">
+            <div><span class="section-label">팀 일정과 선호도 분석</span><h2 id="recommendations-title">모아타임 추천</h2></div>
+            <span class="analysis-badge"><svg class="icon" aria-hidden="true"><use href="#icon-sparkles" /></svg>추천 완료</span>
+          </header>
+          <div class="recommendation-grid">
+            <article class="recommendation-card recommendation-card--best">
+              <div class="recommendation-card__rank"><span>가장 좋은 시간</span><strong>98<small>점</small></strong></div>
+              <div class="recommendation-card__time"><span>화<small>18</small></span><p><strong>오후 2:00–3:00</strong><small>8월 18일 화요일</small></p></div>
+              <ul>
+                <li><svg class="icon" aria-hidden="true"><use href="#icon-check" /></svg>5명 모두 참석 가능</li>
+                <li><svg class="icon" aria-hidden="true"><use href="#icon-check" /></svg>팀의 오후 선호도와 일치</li>
+              </ul>
+              <button class="select-time" type="button" data-choice="8월 18일 화요일 · 오후 2:00–3:00">이 시간 선택</button>
+            </article>
+            <article class="recommendation-card">
+              <div class="recommendation-card__rank"><span>두 번째 추천</span><strong>86<small>점</small></strong></div>
+              <div class="recommendation-card__time"><span>수<small>19</small></span><p><strong>오전 11:00–12:00</strong><small>8월 19일 수요일</small></p></div>
+              <ul>
+                <li><svg class="icon" aria-hidden="true"><use href="#icon-check" /></svg>필수 멤버 참석 가능</li>
+                <li class="muted"><svg class="icon" aria-hidden="true"><use href="#icon-users" /></svg>4명 참석 가능</li>
+              </ul>
+              <button class="select-time" type="button" data-choice="8월 19일 수요일 · 오전 11:00–12:00">이 시간 선택</button>
+            </article>
+            <article class="recommendation-card">
+              <div class="recommendation-card__rank"><span>세 번째 추천</span><strong>81<small>점</small></strong></div>
+              <div class="recommendation-card__time"><span>목<small>20</small></span><p><strong>오후 3:00–4:00</strong><small>8월 20일 목요일</small></p></div>
+              <ul>
+                <li><svg class="icon" aria-hidden="true"><use href="#icon-check" /></svg>팀의 오후 선호도와 일치</li>
+                <li class="muted"><svg class="icon" aria-hidden="true"><use href="#icon-users" /></svg>4명 참석 가능</li>
+              </ul>
+              <button class="select-time" type="button" data-choice="8월 20일 목요일 · 오후 3:00–4:00">이 시간 선택</button>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="meeting-modal" id="meeting-modal" hidden>
+      <button class="meeting-modal__backdrop" type="button" aria-label="확인 창 닫기"></button>
+      <section class="meeting-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+        <button class="dialog-close" type="button" aria-label="확인 창 닫기">
+          <svg class="icon" aria-hidden="true"><use href="#icon-close" /></svg>
+        </button>
+        <div class="dialog-state dialog-state--confirm">
+          <span class="dialog-icon"><svg class="icon" aria-hidden="true"><use href="#icon-calendar" /></svg></span>
+          <span class="section-label">모임 확정</span>
+          <h2 id="dialog-title">이 시간으로 모일까요?</h2>
+          <p id="dialog-choice">8월 18일 화요일 · 오후 2:00–3:00</p>
+          <div class="dialog-summary"><span>해커톤 팀</span><strong>5명에게 알림</strong></div>
+          <div class="dialog-actions">
+            <button class="dialog-cancel" type="button">취소</button>
+            <button class="dialog-confirm" id="confirm-meeting" type="button">모임 확정하기</button>
+          </div>
+        </div>
+        <div class="dialog-state dialog-state--success" hidden>
+          <span class="dialog-icon dialog-icon--success"><svg class="icon" aria-hidden="true"><use href="#icon-check" /></svg></span>
+          <span class="section-label">일정 등록 완료</span>
+          <h2>모임이 확정됐어요</h2>
+          <p id="success-choice">8월 18일 화요일 · 오후 2:00–3:00</p>
+          <button class="dialog-confirm dialog-done" type="button">확인</button>
+        </div>
+      </section>
+    </div>
+
+    <svg class="icon-sprite" aria-hidden="true">
+      <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+      <symbol id="icon-logout" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M15 4h3a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-3"/></symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.3 3.7L17 8l-3.7 1.3L12 13l-1.3-3.7L7 8l3.7-1.3L12 3ZM5 14l.9 2.1L8 17l-2.1.9L5 20l-.9-2.1L2 17l2.1-.9L5 14ZM19 13l.9 2.1 2.1.9-2.1.9L19 19l-.9-2.1L16 16l2.1-.9L19 13Z"/></symbol>
+      <symbol id="icon-user-plus" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    </svg>
+
+    <script>
+      const sidebar = document.querySelector("#group-sidebar");
+      const scrim = document.querySelector("#sidebar-scrim");
+      const openMenu = () => {
+        sidebar.classList.add("is-open");
+        scrim.classList.add("is-visible");
+      };
+      const closeMenu = () => {
+        sidebar.classList.remove("is-open");
+        scrim.classList.remove("is-visible");
+      };
+
+      document.querySelector("#mobile-open").addEventListener("click", openMenu);
+      document.querySelector("#mobile-close").addEventListener("click", closeMenu);
+      scrim.addEventListener("click", closeMenu);
+
+      const timeCells = document.querySelectorAll(".time-cell");
+      const selectedDay = document.querySelector("#selected-day");
+      const selectedDate = document.querySelector("#selected-date");
+      const selectedCount = document.querySelector("#selected-count");
+      const selectedNote = document.querySelector("#selected-note");
+
+      timeCells.forEach((cell) => {
+        cell.addEventListener("click", () => {
+          timeCells.forEach((item) => {
+            item.classList.remove("is-selected");
+            item.removeAttribute("aria-pressed");
+          });
+          cell.classList.add("is-selected");
+          cell.setAttribute("aria-pressed", "true");
+          selectedDay.textContent = cell.dataset.day;
+          selectedDate.textContent = `${cell.dataset.date} · ${cell.dataset.time}`;
+          selectedCount.textContent = cell.dataset.count;
+          selectedNote.lastChild.textContent = Number(cell.dataset.count) === 5
+            ? "모두 참석할 수 있어요"
+            : `${5 - Number(cell.dataset.count)}명은 다른 시간이 필요해요`;
+        });
+      });
+
+      const recommendations = document.querySelector("#recommendations");
+      document.querySelector("#find-best-time").addEventListener("click", () => {
+        recommendations.hidden = false;
+        requestAnimationFrame(() => recommendations.classList.add("is-visible"));
+        window.setTimeout(() => recommendations.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+      });
+
+      const modal = document.querySelector("#meeting-modal");
+      const dialogChoice = document.querySelector("#dialog-choice");
+      const successChoice = document.querySelector("#success-choice");
+      const confirmState = document.querySelector(".dialog-state--confirm");
+      const successState = document.querySelector(".dialog-state--success");
+      let lastTrigger;
+
+      const closeModal = () => {
+        modal.hidden = true;
+        confirmState.hidden = false;
+        successState.hidden = true;
+        document.body.classList.remove("modal-open");
+        lastTrigger?.focus();
+      };
+
+      document.querySelectorAll(".select-time").forEach((button) => {
+        button.addEventListener("click", () => {
+          lastTrigger = button;
+          dialogChoice.textContent = button.dataset.choice;
+          successChoice.textContent = button.dataset.choice;
+          modal.hidden = false;
+          document.body.classList.add("modal-open");
+          document.querySelector("#confirm-meeting").focus();
+        });
+      });
+
+      document.querySelector("#confirm-meeting").addEventListener("click", () => {
+        confirmState.hidden = true;
+        successState.hidden = false;
+        document.querySelector(".dialog-done").focus();
+      });
+
+      document.querySelectorAll(".meeting-modal__backdrop, .dialog-close, .dialog-cancel, .dialog-done").forEach((button) => {
+        button.addEventListener("click", closeModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (!modal.hidden) closeModal();
+          else closeMenu();
+        }
+      });
+    </script>
+  </body>
+</html>
