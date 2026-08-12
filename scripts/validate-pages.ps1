@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $expectedPages = [ordered]@{
-  'login.html' = 'login'
+  'index.html' = 'login'
   'personal.html' = 'personal'
   'group.html' = 'group'
 }

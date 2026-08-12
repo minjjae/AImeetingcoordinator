@@ -23,6 +23,18 @@ const baseEvents = [
   { id: "workout", date: "2026-08-23", startTime: "10:00", endTime: "11:00", title: "운동", source: "google", group: "개인", people: "나", importance: "낮음" },
 ];
 
+const GROUP_STORAGE_KEY = "feetUserGroups";
+const JOIN_CODE_PATTERN = /^[A-Z]{5}[0-9]{5}$/;
+const DEMO_JOIN_GROUPS = {
+  FEATY20268: {
+    id: "ai-scheduling-demo-team",
+    name: "AI 스케줄링 데모 팀",
+    description: "함께 가능한 시간을 넘어 최적의 회의 시간을 찾는 데모 그룹입니다.",
+    memberCount: 5,
+    source: "joined",
+  },
+};
+
 const calendar = document.getElementById("weekly-calendar");
 const eventDialog = document.getElementById("event-dialog");
 const eventDetail = document.getElementById("event-detail");
@@ -35,6 +47,82 @@ const demoYear = 2026;
 const demoMonth = 7;
 let visibleMonth = new Date(demoYear, demoMonth, 1);
 let toastTimer;
+
+function readUserGroups() {
+  try {
+    const stored = JSON.parse(window.localStorage.getItem(GROUP_STORAGE_KEY) || "[]");
+    return Array.isArray(stored) ? stored : [];
+  } catch {
+    return [];
+  }
+}
+
+function storeUserGroups(groups) {
+  window.localStorage.setItem(GROUP_STORAGE_KEY, JSON.stringify(groups));
+}
+
+function normalizeJoinCode(value) {
+  return value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 10);
+}
+
+function secureIndex(size) {
+  const values = new Uint32Array(1);
+  const unbiasedLimit = Math.floor(0x100000000 / size) * size;
+  do window.crypto.getRandomValues(values);
+  while (values[0] >= unbiasedLimit);
+  return values[0] % size;
+}
+
+function generateJoinCode() {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const digits = "0123456789";
+  let code = "";
+  for (let index = 0; index < 5; index += 1) code += alphabet[secureIndex(alphabet.length)];
+  for (let index = 0; index < 5; index += 1) code += digits[secureIndex(digits.length)];
+  return code;
+}
+
+function groupUrl(group) {
+  const url = new URL("./group.html", window.location.href);
+  url.searchParams.set("groupId", group.id);
+  return url.href;
+}
+
+function appendGroupCard(group) {
+  const list = document.querySelector(".group-list");
+  if (!list || list.querySelector(`[data-group-id="${group.id}"]`)) return;
+
+  const card = document.createElement("a");
+  const icon = document.createElement("span");
+  const copy = document.createElement("span");
+  const name = document.createElement("strong");
+  const detail = document.createElement("small");
+  const arrow = document.createElement("span");
+
+  card.className = "group-card";
+  card.href = groupUrl(group);
+  card.dataset.groupId = group.id;
+  card.setAttribute("aria-label", `${group.name} 그룹 홈으로 이동`);
+  icon.className = "group-icon group-icon--indigo";
+  icon.setAttribute("aria-hidden", "true");
+  icon.textContent = group.name.slice(0, 1).toUpperCase();
+  copy.className = "group-copy";
+  name.textContent = group.name;
+  detail.textContent = `${group.memberCount}명 · 최적 회의 시간 찾기`;
+  copy.append(name, detail);
+  arrow.className = "arrow";
+  arrow.setAttribute("aria-hidden", "true");
+  arrow.textContent = "→";
+  card.append(icon, copy, arrow);
+  list.append(card);
+}
+
+function renderUserGroups() {
+  const groups = readUserGroups();
+  groups.forEach(appendGroupCard);
+  const count = document.querySelector(".group-count");
+  if (count) count.textContent = String(3 + groups.length);
+}
 
 function dateKey(date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
@@ -52,6 +140,9 @@ function readStoredMeetings() {
         start: query.get("meetingStart"),
         end: query.get("meetingEnd"),
         mode: query.get("meetingMode") || "online",
+        groupId: query.get("meetingGroupId") || "hackathon-team",
+        groupName: query.get("meetingGroup") || "해커톤 팀",
+        participantCount: Number(query.get("meetingParticipants")) || 5,
       }]
     : [];
 
@@ -80,8 +171,8 @@ function readStoredMeetings() {
       endTime: timeKey(end),
       title: meeting.title,
       source: "feet",
-      group: "해커톤 팀",
-      people: "5명",
+      group: meeting.groupName || "해커톤 팀",
+      people: `${meeting.participantCount || 5}명`,
       importance: "높음",
       mode: meeting.mode === "in_person" ? "대면" : "비대면",
       createdFromGroup: true,
@@ -245,6 +336,7 @@ function showToast(message) {
 renderCalendar();
 renderMonthCalendar();
 updateNextMeeting();
+renderUserGroups();
 
 document.getElementById("scroll-calendar-left").addEventListener("click", () => document.getElementById("calendar-viewport").scrollBy({ left: -420, behavior: "smooth" }));
 document.getElementById("scroll-calendar-right").addEventListener("click", () => document.getElementById("calendar-viewport").scrollBy({ left: 420, behavior: "smooth" }));
@@ -264,13 +356,95 @@ document.addEventListener("click", (event) => {
   if (event.target.matches("dialog")) event.target.close();
 });
 
-document.querySelectorAll("[data-demo-form]").forEach((form) => {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    showToast(form.dataset.demoForm);
-    form.closest("dialog").close();
-    form.reset();
-  });
+const createGroupForm = document.querySelector("#create-group-form");
+const createGroupName = document.querySelector("#create-group-name");
+const createGroupDescription = document.querySelector("#create-group-description");
+const inviteCodeResult = document.querySelector("#invite-code-result");
+const createdInviteCode = document.querySelector("#created-invite-code");
+const openCreatedGroup = document.querySelector("#open-created-group");
+
+createGroupForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const name = createGroupName.value.trim();
+  if (!name) return;
+
+  const groups = readUserGroups();
+  let code = generateJoinCode();
+  while (groups.some((group) => group.joinCode === code)) code = generateJoinCode();
+  const group = {
+    id: `group-${Date.now().toString(36)}`,
+    name,
+    description: createGroupDescription.value.trim() || "새로운 그룹의 최적 회의 시간을 함께 찾아보세요.",
+    memberCount: 1,
+    joinCode: code,
+    source: "created",
+  };
+  groups.push(group);
+  storeUserGroups(groups);
+  appendGroupCard(group);
+  document.querySelector(".group-count").textContent = String(3 + groups.length);
+  createdInviteCode.textContent = code;
+  openCreatedGroup.href = groupUrl(group);
+  inviteCodeResult.hidden = false;
+  showToast(`${name} 그룹과 참여 코드를 만들었어요.`);
+});
+
+document.querySelector("#copy-invite-code").addEventListener("click", async () => {
+  const code = createdInviteCode.textContent;
+  if (!code) return;
+  try {
+    await navigator.clipboard.writeText(code);
+    showToast("참여 코드를 복사했어요.");
+  } catch {
+    showToast(`참여 코드: ${code}`);
+  }
+});
+
+const joinGroupForm = document.querySelector("#join-group-form");
+const joinCodeInput = document.querySelector("#join-code");
+const joinCodeFeedback = document.querySelector("#join-code-feedback");
+
+joinCodeInput.addEventListener("input", () => {
+  joinCodeInput.value = normalizeJoinCode(joinCodeInput.value);
+  joinCodeInput.removeAttribute("aria-invalid");
+  joinCodeFeedback.textContent = "";
+});
+
+document.querySelector("#fill-demo-code").addEventListener("click", () => {
+  joinCodeInput.value = "FEATY20268";
+  joinCodeInput.dispatchEvent(new Event("input"));
+  joinCodeInput.focus();
+});
+
+joinGroupForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const code = normalizeJoinCode(joinCodeInput.value);
+  if (!JOIN_CODE_PATTERN.test(code)) {
+    joinCodeInput.setAttribute("aria-invalid", "true");
+    joinCodeFeedback.textContent = "영문 5자 뒤에 숫자 5자를 입력해 주세요.";
+    joinCodeInput.focus();
+    return;
+  }
+
+  const groups = readUserGroups();
+  const createdGroup = groups.find((group) => group.joinCode === code);
+  const target = createdGroup || DEMO_JOIN_GROUPS[code];
+  if (!target) {
+    joinCodeInput.setAttribute("aria-invalid", "true");
+    joinCodeFeedback.textContent = "유효하지 않거나 만료된 참여 코드입니다.";
+    return;
+  }
+
+  const existing = groups.find((group) => group.id === target.id);
+  if (!existing) {
+    groups.push(target);
+    storeUserGroups(groups);
+    appendGroupCard(target);
+    document.querySelector(".group-count").textContent = String(3 + groups.length);
+  }
+
+  showToast(existing ? "이미 참여 중인 그룹이에요." : `${target.name}에 참여했어요.`);
+  window.setTimeout(() => { window.location.href = groupUrl(target); }, 450);
 });
 
 document.querySelector("[data-open-profile]").addEventListener("click", () => showToast("프로필 설정 화면은 Google 계정 정보와 연결될 예정이에요."));

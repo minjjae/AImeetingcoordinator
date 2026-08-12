@@ -4,9 +4,16 @@ The static group demo uses a deterministic optimizer. It does not call an LLM to
 
 ## Browser entry points
 
+- `personal.html` + `app.js`: create a group, issue a `AAAAA00000` join code, or join with the demo code `FEATY20268`.
 - `group-calendar-adapter.js`: Google Calendar integration boundary. Keep `getGroupBusyBlocks(...)` and replace its mock implementation.
 - `group-scheduler.js`: pure candidate generation, availability evaluation, lexicographic ranking, alternatives, and notification payloads.
 - `group-page.js`: form and month-calendar UI only.
+
+## Static demo handoff
+
+The hackathon demo keeps created and joined groups in `localStorage.feetUserGroups`. The personal page opens `group.html?groupId=...`; the group page resolves that ID and renders the correct name, member count, member list, and required-attendee controls. Confirmed meetings are stored per `groupId`, then handed back to the personal calendar with the group name and participant count.
+
+This browser storage is only the no-backend demo adapter. The production path remains the authenticated `create_group_join_code` and `join_group_with_code` RPC flow documented in `page-contracts.md` and the Supabase migrations.
 
 ## Calendar adapter contract
 

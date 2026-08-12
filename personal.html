@@ -94,7 +94,7 @@
             </div>
 
             <div class="group-list">
-              <a class="group-card" href="./group.html#overview" aria-label="해커톤 팀 그룹 홈으로 이동">
+              <a class="group-card" href="./group.html?groupId=hackathon-team#overview" aria-label="해커톤 팀 그룹 홈으로 이동">
                 <span class="group-icon group-icon--indigo" aria-hidden="true">H</span>
                 <span class="group-copy">
                   <strong>해커톤 팀</strong>
@@ -102,7 +102,7 @@
                 </span>
                 <span class="arrow" aria-hidden="true">→</span>
               </a>
-              <a class="group-card" href="./group.html#overview" aria-label="디자인 스터디 그룹 홈으로 이동">
+              <a class="group-card" href="./group.html?groupId=design-study#overview" aria-label="디자인 스터디 그룹 홈으로 이동">
                 <span class="group-icon group-icon--peach" aria-hidden="true">D</span>
                 <span class="group-copy">
                   <strong>디자인 스터디</strong>
@@ -110,7 +110,7 @@
                 </span>
                 <span class="arrow" aria-hidden="true">→</span>
               </a>
-              <a class="group-card" href="./group.html#overview" aria-label="프로젝트 멘토링 그룹 홈으로 이동">
+              <a class="group-card" href="./group.html?groupId=project-mentoring#overview" aria-label="프로젝트 멘토링 그룹 홈으로 이동">
                 <span class="group-icon group-icon--mint" aria-hidden="true">M</span>
                 <span class="group-copy">
                   <strong>프로젝트 멘토링</strong>
@@ -188,9 +188,15 @@
         </div>
         <button class="close-button" type="button" aria-label="닫기" data-close-dialog>×</button>
       </div>
-      <form class="modal-form" data-demo-form="그룹을 만들었어요. 멤버를 초대해 일정을 조율해 보세요.">
-        <label>그룹 이름<input class="form-input" type="text" placeholder="예: 해커톤 팀" required /></label>
-        <label>그룹 소개<input class="form-input" type="text" placeholder="그룹의 목적을 짧게 적어주세요" /></label>
+      <form class="modal-form" id="create-group-form">
+        <label>그룹 이름<input class="form-input" id="create-group-name" type="text" placeholder="예: 해커톤 팀" maxlength="80" required /></label>
+        <label>그룹 소개<input class="form-input" id="create-group-description" type="text" placeholder="그룹의 목적을 짧게 적어주세요" maxlength="160" /></label>
+        <div class="invite-code-result" id="invite-code-result" hidden aria-live="polite">
+          <span>그룹 참여 코드</span>
+          <div><strong id="created-invite-code"></strong><button class="text-button" id="copy-invite-code" type="button">복사</button></div>
+          <small>영문 5자 + 숫자 5자 · 그룹 멤버에게 공유하세요.</small>
+          <a class="button button--primary result-link" id="open-created-group" href="./group.html">그룹 홈 열기</a>
+        </div>
         <div class="modal-footer"><button class="button button--secondary" type="button" data-close-dialog>취소</button><button class="button button--primary" type="submit">그룹 만들기</button></div>
       </form>
     </dialog>
@@ -203,9 +209,11 @@
         </div>
         <button class="close-button" type="button" aria-label="닫기" data-close-dialog>×</button>
       </div>
-      <form class="modal-form" data-demo-form="참여 요청을 보냈어요. 그룹 호스트가 수락하면 알려드릴게요.">
-        <label>초대 코드<input class="form-input" type="text" placeholder="예: MATCHU-2026" required /></label>
-        <div class="modal-footer"><button class="button button--secondary" type="button" data-close-dialog>취소</button><button class="button button--primary" type="submit">요청 보내기</button></div>
+      <form class="modal-form" id="join-group-form" novalidate>
+        <label for="join-code">참여 코드<input class="form-input code-input" id="join-code" name="joinCode" type="text" placeholder="ABCDE12345" minlength="10" maxlength="10" pattern="[A-Za-z]{5}[0-9]{5}" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="join-code-hint join-code-feedback" required /></label>
+        <p class="form-hint" id="join-code-hint">영문 5자 + 숫자 5자 · 데모 코드 <button class="inline-code" id="fill-demo-code" type="button">FEATY20268</button></p>
+        <p class="form-feedback" id="join-code-feedback" role="status" aria-live="polite"></p>
+        <div class="modal-footer"><button class="button button--secondary" type="button" data-close-dialog>취소</button><button class="button button--primary" type="submit">그룹 참여하기</button></div>
       </form>
     </dialog>
 
