@@ -1,0 +1,17 @@
+# Dependencies and framework output
+node_modules/
+.next/
+out/
+
+# Local configuration and Supabase state
+.env
+.env.*
+!.env.example
+.supabase/
+
+# Local scratch files, including PDF inspection renders
+tmp/
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
