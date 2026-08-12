@@ -102,4 +102,4 @@ type SchedulingReview = {
 
 **Purpose:** Show a personal, in-app weekly schedule report: confirmed meetings, conflicts, and attendance insight by group.
 
-**MVP delivery:** webpage only. A Google Calendar-only consent cannot send Gmail. If email is added later, use either the app's transactional-mail provider or a separate Gmail consent scope and make it opt-in.
+**MVP delivery:** webpage only. A Google Calendar-only consent cannot send Gmail. The optional adjustment-email demo uses a separately consented Gmail connection, creates a preview/draft first, and sends only after explicit confirmation. See [Gmail adjustment-email demo setup](gmail-mediation-demo.md).

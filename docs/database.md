@@ -16,7 +16,7 @@ Google sign-in -> calendar busy blocks -> group request -> rule-engine candidate
 1. Google Calendar supplies **availability**, not group-visible event content. The app caches only busy start/end blocks needed by the scheduler.
 2. `personal_importance` belongs to the **membership**, not the group. A person can treat one group as high priority and another as low priority.
 3. Attendance is recorded per confirmed meeting. Attendance rates are derived from those records, not stored as a mutable number on `profiles`.
-4. Google sign-in plus Calendar scope does **not** grant Gmail sending permission. The MVP delivers the weekly report in the web app. Email delivery is a later, separately consented integration.
+4. Google sign-in plus Calendar scope does **not** grant Gmail sending permission. The normal MVP delivery is the web app; the optional adjustment-email demo uses a separately consented, opt-in Gmail connection and requires final human confirmation.
 5. Access and refresh tokens never belong in client-readable tables. Store them only in secure server-side secret storage; the database keeps connection metadata only.
 
 ## ERD

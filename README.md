@@ -20,10 +20,13 @@ Natural-language request -> AI constraint parser -> rule engine -> ranked candid
 - [Shared MVP mock fixture](fixtures/mvp-demo.json)
 - [Static HTML page merge guide](docs/html-merge-guide.md)
 - [Team Git workflow](CONTRIBUTING.md)
+- [Gmail adjustment-email demo setup](docs/gmail-mediation-demo.md)
 
 ## Privacy boundary
 
 Google Calendar is used to produce availability data. Calendar event details and OAuth tokens are not exposed to other group members. The initial schema stores only busy blocks required for scheduling, while provider tokens must live in secure server-side storage.
+
+For the hackathon demo, a separately consented Gmail connection can create an individual adjustment-request draft after a coordinator reviews it. It never sends automatically from calendar data.
 
 ## Suggested ownership
 
