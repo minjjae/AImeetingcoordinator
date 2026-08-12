@@ -1,0 +1,155 @@
+Project AI_Meeting_Coordinator {
+  database_type: 'PostgreSQL'
+  Note: 'auth.users is managed by Supabase Auth. public.profiles mirrors its UUID.'
+}
+
+Table auth.users {
+  id uuid [pk]
+}
+
+Table public.profiles {
+  id uuid [pk, ref: - auth.users.id]
+  email varchar [not null, unique]
+  display_name varchar
+  avatar_url varchar
+  timezone varchar
+  weekly_report_opt_in boolean
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table public.calendar_connections {
+  id uuid [pk]
+  user_id uuid [not null, ref: > public.profiles.id]
+  provider varchar [not null, note: 'google only in MVP']
+  provider_account_id varchar
+  granted_scopes jsonb [note: 'No OAuth token is stored here']
+  calendar_ids jsonb
+  sync_status varchar
+  last_synced_at timestamptz
+}
+
+Table public.calendar_busy_blocks {
+  id uuid [pk]
+  calendar_connection_id uuid [not null, ref: > public.calendar_connections.id]
+  user_id uuid [not null, ref: > public.profiles.id]
+  source_event_id varchar [not null]
+  starts_at timestamptz [not null]
+  ends_at timestamptz [not null]
+  is_all_day boolean
+}
+
+Table public.user_preferences {
+  user_id uuid [pk, ref: - public.profiles.id]
+  preferred_period varchar
+  workday_start time
+  workday_end time
+  max_meetings_per_day int
+}
+
+Table public.team_groups {
+  id uuid [pk]
+  owner_user_id uuid [not null, ref: > public.profiles.id]
+  name varchar [not null]
+  description text
+  default_meeting_importance int
+  created_at timestamptz
+}
+
+Table public.group_members {
+  group_id uuid [not null, ref: > public.team_groups.id]
+  user_id uuid [not null, ref: > public.profiles.id]
+  role varchar
+  personal_importance int [note: 'The member-level priority for this group']
+  joined_at timestamptz
+
+  Indexes {
+    (group_id, user_id) [pk]
+  }
+}
+
+Table public.meeting_requests {
+  id uuid [pk]
+  group_id uuid [not null, ref: > public.team_groups.id]
+  requested_by uuid [not null, ref: > public.profiles.id]
+  title varchar
+  raw_request text
+  ai_constraints jsonb
+  meeting_kind varchar
+  meeting_importance int
+  duration_minutes int
+  date_range_start date
+  date_range_end date
+  preferred_period varchar
+  status varchar
+  created_at timestamptz
+}
+
+Table public.meeting_request_participants {
+  request_id uuid [not null, ref: > public.meeting_requests.id]
+  user_id uuid [not null, ref: > public.profiles.id]
+  is_required boolean
+
+  Indexes {
+    (request_id, user_id) [pk]
+  }
+}
+
+Table public.schedule_candidates {
+  id uuid [pk]
+  request_id uuid [not null, ref: > public.meeting_requests.id]
+  starts_at timestamptz
+  ends_at timestamptz
+  rank int
+  score decimal
+  score_breakdown jsonb
+  available_count int
+  required_available_count int
+}
+
+Table public.candidate_availability {
+  candidate_id uuid [not null, ref: > public.schedule_candidates.id]
+  user_id uuid [not null, ref: > public.profiles.id]
+  availability varchar
+  reason_code varchar
+
+  Indexes {
+    (candidate_id, user_id) [pk]
+  }
+}
+
+Table public.meetings {
+  id uuid [pk]
+  group_id uuid [not null, ref: > public.team_groups.id]
+  source_request_id uuid [unique, ref: - public.meeting_requests.id]
+  created_by uuid [not null, ref: > public.profiles.id]
+  title varchar
+  starts_at timestamptz
+  ends_at timestamptz
+  status varchar
+  context jsonb
+}
+
+Table public.meeting_participants {
+  meeting_id uuid [not null, ref: > public.meetings.id]
+  user_id uuid [not null, ref: > public.profiles.id]
+  is_required boolean
+  rsvp_status varchar
+  attendance_status varchar
+  attendance_note text
+
+  Indexes {
+    (meeting_id, user_id) [pk]
+  }
+}
+
+Table public.weekly_reports {
+  id uuid [pk]
+  user_id uuid [not null, ref: > public.profiles.id]
+  week_start date [not null]
+  delivery_channel varchar
+  delivery_status varchar
+  content jsonb
+  ai_summary text
+  generated_at timestamptz
+}
