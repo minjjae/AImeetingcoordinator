@@ -1,0 +1,27 @@
+name: Validate static pages
+
+on:
+  pull_request:
+    paths:
+      - '**.html'
+      - 'scripts/validate-pages.ps1'
+      - '.github/workflows/validate-static-pages.yml'
+  push:
+    branches: [master]
+    paths:
+      - '**.html'
+      - 'scripts/validate-pages.ps1'
+      - '.github/workflows/validate-static-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check HTML page contract
+        shell: pwsh
+        run: ./scripts/validate-pages.ps1

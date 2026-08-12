@@ -30,8 +30,8 @@ docs/<short-description>
 ## Merge order for the hackathon
 
 1. Merge the database migration and mock fixture contract.
-2. Merge login/profile and group workspace in parallel.
-3. Merge scheduling UI only after it reads the shared types/contract.
+2. Build and merge `login.html`, `personal.html`, and `group.html` in parallel using the [static HTML merge guide](docs/html-merge-guide.md).
+3. Run `scripts/validate-pages.ps1 -RequireComplete` only after all three pages have landed.
 4. Reserve the final 30 minutes for one clean demo pass on `master`.
 
 ## Commit style

@@ -18,6 +18,7 @@ Natural-language request -> AI constraint parser -> rule engine -> ranked candid
 - [Initial Supabase/Postgres migration](supabase/migrations/0001_initial_schema.sql)
 - [Page data contracts](docs/page-contracts.md)
 - [Shared MVP mock fixture](fixtures/mvp-demo.json)
+- [Static HTML page merge guide](docs/html-merge-guide.md)
 - [Team Git workflow](CONTRIBUTING.md)
 
 ## Privacy boundary
