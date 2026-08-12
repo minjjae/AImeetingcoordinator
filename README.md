@@ -22,6 +22,7 @@ Natural-language request -> AI constraint parser -> rule engine -> ranked candid
 - [Static HTML page merge guide](docs/html-merge-guide.md)
 - [Team Git workflow](CONTRIBUTING.md)
 - [Gmail adjustment-email demo setup](docs/gmail-mediation-demo.md)
+- [Pruned five-minute presentation plan](docs/presentation-final-pruned.md)
 - [Group join-code data and RPC flow](docs/database.md#joining-a-group-with-a-code)
 
 ## Privacy boundary
